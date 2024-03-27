@@ -17,7 +17,7 @@ const DishHandler = {
     await Restaurant.findByIdAndUpdate(
       savedDish.restaurant,
       { $push: { dishes: savedDish._id } },
-      { new: true }
+      { new: true, useFindAndModify: false }
     );
     return savedDish;
   },
@@ -59,6 +59,13 @@ const DishHandler = {
       { status: "deleted" },
       { new: true }
     );
+    if (deletedDish) {
+      await Restaurant.findByIdAndUpdate(
+        deletedDish.restaurant,
+        { $pull: { dishes: deletedDish._id } },
+        { useFindAndModify: false }
+      );
+    }
     return deletedDish;
   },
 };

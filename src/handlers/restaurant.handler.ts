@@ -78,6 +78,13 @@ const RestaurantHandler = {
       { status: "deleted" },
       { new: true }
     );
+    if (deletedRestaurant) {
+      await Chef.findByIdAndUpdate(
+        deletedRestaurant.chef,
+        { $pull: { restaurants: deletedRestaurant._id } },
+        { new: true }
+      );
+    }
     return deletedRestaurant;
   },
 };

@@ -74,6 +74,3 @@ const ChefHandler = {
 };
 
 export default ChefHandler;
-function deepEqual(deleted: IRestaurant, restaurant: IRestaurant): unknown {
-  throw new Error("Function not implemented.");
-}
