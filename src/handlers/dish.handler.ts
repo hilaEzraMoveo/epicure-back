@@ -1,5 +1,6 @@
 import Dish, { IDish } from "../models/dish.model";
 import Restaurant from "../models/restaurant.model";
+import { StatusEnum } from "../models/status.enum";
 
 const DishHandler = {
   async getAll(): Promise<IDish[]> {
@@ -56,7 +57,7 @@ const DishHandler = {
   async delete(dishId: string): Promise<IDish | null> {
     const deletedDish = await Dish.findByIdAndUpdate(
       dishId,
-      { status: "deleted" },
+      { status: StatusEnum.DELETED },
       { new: true }
     );
     if (deletedDish) {
