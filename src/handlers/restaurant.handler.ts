@@ -1,5 +1,6 @@
 import Restaurant, { IRestaurant } from "../models/restaurant.model";
 import Chef from "../models/chef.model";
+import { StatusEnum } from "../models/status.enum";
 
 const RestaurantHandler = {
   async getAll(limit: number, skip: number): Promise<IRestaurant[]> {
@@ -75,7 +76,7 @@ const RestaurantHandler = {
   async delete(restaurantId: string): Promise<IRestaurant | null> {
     const deletedRestaurant = await Restaurant.findByIdAndUpdate(
       restaurantId,
-      { status: "deleted" },
+      { status: StatusEnum.DELETED },
       { new: true }
     );
     if (deletedRestaurant) {
