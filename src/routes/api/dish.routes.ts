@@ -3,10 +3,10 @@ import * as dishController from "../../controllers/dish.controller";
 
 const dishRouter = Router();
 
-dishRouter.get("/", dishController.getAllDishes);
-dishRouter.get("/:id", dishController.getDishById);
-dishRouter.post("/", dishController.createDish);
-dishRouter.put("/:id", dishController.updateDish);
+dishRouter.get("/", dishController.getAll);
+dishRouter.get("/:id", dishController.getById);
+dishRouter.post("/", dishController.create);
+dishRouter.put("/:id", dishController.update);
 dishRouter.delete("/:id", dishController.deleteDish);
 
 export default dishRouter;

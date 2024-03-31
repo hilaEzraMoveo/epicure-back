@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import RestaurantHandler from "../handlers/restaurant.handler";
 
-export const getAllRestaurants = async (req: Request, res: Response) => {
+export const getAll = async (req: Request, res: Response) => {
   try {
-    const page = parseInt(req.query.page as string) || 1; // Current page (default: 1)
-    const limit = parseInt(req.query.limit as string) || 3; // Number of documents per page (default: 2)
-    const skip = (page - 1) * limit; // Number of documents to skip
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 3;
+    const skip = (page - 1) * limit;
 
     const restaurants = await RestaurantHandler.getAll(limit, skip);
     res.json(restaurants);
@@ -14,7 +14,7 @@ export const getAllRestaurants = async (req: Request, res: Response) => {
   }
 };
 
-export const getRestaurantById = async (req: Request, res: Response) => {
+export const getById = async (req: Request, res: Response) => {
   try {
     const restaurantId = req.params.id;
     const restaurant = await RestaurantHandler.getById(restaurantId);
@@ -27,7 +27,7 @@ export const getRestaurantById = async (req: Request, res: Response) => {
   }
 };
 
-export const createRestaurant = async (req: Request, res: Response) => {
+export const create = async (req: Request, res: Response) => {
   try {
     const newRestaurant = await RestaurantHandler.create(req.body);
     res.status(201).json(newRestaurant);
@@ -36,7 +36,7 @@ export const createRestaurant = async (req: Request, res: Response) => {
   }
 };
 
-export const updateRestaurant = async (req: Request, res: Response) => {
+export const update = async (req: Request, res: Response) => {
   try {
     const restaurantId = req.params.id;
     const updatedRestaurant = await RestaurantHandler.update(

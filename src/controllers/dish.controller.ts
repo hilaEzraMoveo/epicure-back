@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import DishHandler from "../handlers/dish.handler";
 
-export const getAllDishes = async (req: Request, res: Response) => {
+export const getAll = async (req: Request, res: Response) => {
   try {
     const dishes = await DishHandler.getAll();
     res.json(dishes);
@@ -10,7 +10,7 @@ export const getAllDishes = async (req: Request, res: Response) => {
   }
 };
 
-export const getDishById = async (req: Request, res: Response) => {
+export const getById = async (req: Request, res: Response) => {
   try {
     const dishId = req.params.id;
     const dish = await DishHandler.getById(dishId);
@@ -23,7 +23,7 @@ export const getDishById = async (req: Request, res: Response) => {
   }
 };
 
-export const createDish = async (req: Request, res: Response) => {
+export const create = async (req: Request, res: Response) => {
   try {
     const newDish = await DishHandler.create(req.body);
     console.log(newDish);
@@ -33,7 +33,7 @@ export const createDish = async (req: Request, res: Response) => {
   }
 };
 
-export const updateDish = async (req: Request, res: Response) => {
+export const update = async (req: Request, res: Response) => {
   try {
     const dishId = req.params.id;
     const updatedDish = await DishHandler.update(dishId, req.body);

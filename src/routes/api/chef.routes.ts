@@ -3,10 +3,10 @@ import * as chefController from "../../controllers/chef.controller";
 
 const chefRouter = Router();
 
-chefRouter.get("/", chefController.getAllChefs);
-chefRouter.get("/:id", chefController.getChefById);
-chefRouter.post("/", chefController.createChef);
-chefRouter.put("/:id", chefController.updateChef);
+chefRouter.get("/", chefController.getAll);
+chefRouter.get("/:id", chefController.getById);
+chefRouter.post("/", chefController.create);
+chefRouter.put("/:id", chefController.update);
 chefRouter.delete("/:id", chefController.deleteChef);
 
 export default chefRouter;

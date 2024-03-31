@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import ChefHandler from "../handlers/chef.handler";
 
-export const getAllChefs = async (req: Request, res: Response) => {
+export const getAll = async (req: Request, res: Response) => {
   try {
     const chefs = await ChefHandler.getAll();
     res.json(chefs);
@@ -10,7 +10,7 @@ export const getAllChefs = async (req: Request, res: Response) => {
   }
 };
 
-export const getChefById = async (req: Request, res: Response) => {
+export const getById = async (req: Request, res: Response) => {
   try {
     const chefId = req.params.id;
     const chef = await ChefHandler.getById(chefId);
@@ -23,7 +23,7 @@ export const getChefById = async (req: Request, res: Response) => {
   }
 };
 
-export const createChef = async (req: Request, res: Response) => {
+export const create = async (req: Request, res: Response) => {
   try {
     const newChef = await ChefHandler.create(req.body);
     res.status(201).json(newChef);
@@ -32,7 +32,7 @@ export const createChef = async (req: Request, res: Response) => {
   }
 };
 
-export const updateChef = async (req: Request, res: Response) => {
+export const update = async (req: Request, res: Response) => {
   try {
     const chefId = req.params.id;
     const updatedChefData = req.body.updatedChefData;
