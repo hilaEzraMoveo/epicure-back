@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import { IDish } from "./dish.model";
 import { IChef } from "./chef.model";
-import { StatusEnum } from "./status.enum";
+import { EStatus } from "./status.enum";
 
 export interface IRestaurant extends Document {
   title: string;
@@ -11,7 +11,7 @@ export interface IRestaurant extends Document {
   dishes: IDish[];
   signatureDish: IDish;
   isPopular: boolean;
-  status: StatusEnum;
+  status: EStatus;
 }
 
 const RestaurantShcema: Schema = new mongoose.Schema({
@@ -24,9 +24,9 @@ const RestaurantShcema: Schema = new mongoose.Schema({
   isPopular: { type: Boolean, required: true, default: false },
   status: {
     type: String,
-    enum: StatusEnum,
+    enum: EStatus,
     required: true,
-    default: StatusEnum.ACTIVE,
+    default: EStatus.ACTIVE,
   },
 });
 

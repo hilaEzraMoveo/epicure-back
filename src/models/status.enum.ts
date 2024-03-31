@@ -1,4 +1,4 @@
-export enum StatusEnum {
+export enum EStatus {
   ACTIVE = "active",
   DELETED = "deleted",
 }

@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 import { IRestaurant } from "./restaurant.model";
-import { StatusEnum } from "./status.enum";
+import { EStatus } from "./status.enum";
 
 export interface IChef extends Document {
   title: string;
@@ -8,7 +8,7 @@ export interface IChef extends Document {
   description: string;
   restaurants: IRestaurant[];
   isChefOfTheWeek: boolean;
-  status: StatusEnum;
+  status: EStatus;
 }
 
 const ChefShcema: Schema = new Schema({
@@ -21,9 +21,9 @@ const ChefShcema: Schema = new Schema({
   isChefOfTheWeek: { type: Boolean, required: true, default: false },
   status: {
     type: String,
-    enum: StatusEnum,
+    enum: EStatus,
     required: true,
-    default: StatusEnum.ACTIVE,
+    default: EStatus.ACTIVE,
   },
 });
 

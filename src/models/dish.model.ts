@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 import { IRestaurant } from "./restaurant.model";
-import { StatusEnum } from "./status.enum";
+import { EStatus } from "./status.enum";
 
 export interface IDish extends Document {
   title: string;
@@ -9,7 +9,7 @@ export interface IDish extends Document {
   tags: string[];
   price: number;
   restaurant: IRestaurant;
-  status: StatusEnum;
+  status: EStatus;
 }
 
 const DishShcema: Schema = new Schema({
@@ -25,9 +25,9 @@ const DishShcema: Schema = new Schema({
   },
   status: {
     type: String,
-    enum: StatusEnum,
+    enum: EStatus,
     required: true,
-    default: StatusEnum.ACTIVE,
+    default: EStatus.ACTIVE,
   },
 });
 
