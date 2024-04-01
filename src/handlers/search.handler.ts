@@ -4,19 +4,17 @@ import Chef from "../models/chef.model";
 
 const SearchHandler = {
   async search(keyword: string) {
-    const restaurants = await Restaurant.find({
-      title: { $regex: keyword, $options: "i" },
-    });
+    const [restaurants, chefs, dishes] = await Promise.all([
+      Restaurant.find({ title: { $regex: keyword, $options: "i" } }),
+      Chef.find({ title: { $regex: keyword, $options: "i" } }),
+      Dish.find({ title: { $regex: keyword, $options: "i" } }),
+    ]);
 
-    const chefs = await Chef.find({
-      title: { $regex: keyword, $options: "i" },
-    });
-
-    const dishes = await Dish.find({
-      title: { $regex: keyword, $options: "i" },
-    });
-
-    const searchResults = [...restaurants, ...chefs, ...dishes];
+    const searchResults = {
+      restaurants: restaurants,
+      chefs: chefs,
+      dishes: dishes,
+    };
 
     return searchResults;
   },
