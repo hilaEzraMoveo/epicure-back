@@ -11,9 +11,9 @@ const SearchHandler = {
     ]);
 
     const searchResults = {
-      restaurants: restaurants,
-      chefs: chefs,
-      dishes: dishes,
+      restaurants,
+      chefs,
+      dishes,
     };
 
     return searchResults;
