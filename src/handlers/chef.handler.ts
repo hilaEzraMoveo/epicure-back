@@ -12,6 +12,12 @@ const ChefHandler = {
     const chef = await Chef.findById(chefId);
     return chef;
   },
+  async getChefOfTheWeek(): Promise<IChef | null> {
+    console.log("hila");
+    const chefOfTheWeek = await Chef.findOne({ isChefOfTheWeek: true });
+    console.log(chefOfTheWeek);
+    return chefOfTheWeek;
+  },
   async create(chefData: IChef): Promise<IChef> {
     const newChef = new Chef(chefData);
     const savedChef = await newChef.save();

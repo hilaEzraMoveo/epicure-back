@@ -19,6 +19,16 @@ export const getById = async (req: Request, res: Response) => {
     }
     res.json(chef);
   } catch (error) {
+    res.status(500).json({ message: "An unexpected error occurred" + error });
+  }
+};
+
+export const getChefOfTheWeek = async (req: Request, res: Response) => {
+  try {
+    console.log("getChefOfTheWeek controller start!");
+    const chef = await ChefHandler.getChefOfTheWeek();
+    res.json(chef);
+  } catch (err) {
     res.status(500).json({ message: "An unexpected error occurred" });
   }
 };
