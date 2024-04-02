@@ -14,7 +14,9 @@ const ChefHandler = {
   },
   async getChefOfTheWeek(): Promise<IChef | null> {
     console.log("hila");
-    const chefOfTheWeek = await Chef.findOne({ isChefOfTheWeek: true });
+    const chefOfTheWeek = await Chef.findOne({
+      isChefOfTheWeek: true,
+    }).populate("restaurants");
     console.log(chefOfTheWeek);
     return chefOfTheWeek;
   },
