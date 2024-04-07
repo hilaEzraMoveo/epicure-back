@@ -4,30 +4,33 @@ import { EStatus } from "../models/status.enum";
 
 const RestaurantHandler = {
   async getAll(limit: number, skip: number): Promise<IRestaurant[]> {
-    // const restaurants = await Restaurant.find()
-    //   .populate("chef")
-    //   .skip(skip)
-    //   .limit(limit);
-    const restaurants = await Restaurant.aggregate([
-      { $skip: skip },
-      { $limit: limit },
-      {
-        $lookup: {
-          from: "chefs",
-          localField: "chef",
-          foreignField: "_id",
-          as: "chef",
-        },
-      },
-      {
-        $lookup: {
-          from: "dishes",
-          localField: "dishes",
-          foreignField: "_id",
-          as: "dishes",
-        },
-      },
-    ]);
+    const restaurants = await Restaurant.find()
+      .populate("chef")
+      .populate("dishes")
+      .populate("signatureDish")
+      .skip(skip)
+      .limit(limit);
+    // const restaurants = await Restaurant.aggregate([
+    //   { $skip: skip },
+    //   { $limit: limit },
+    //   {
+    //     $lookup: {
+    //       from: "chefs",
+    //       localField: "chef",
+    //       foreignField: "_id",
+    //       as: "chef",
+    //     },
+    //   },
+    //   {
+    //     $lookup: {
+    //       from: "dishes",
+    //       localField: "dishes",
+    //       foreignField: "_id",
+    //       as: "dishes",
+    //     },
+    //   },
+    // ]);
+
     return restaurants;
   },
 
