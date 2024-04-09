@@ -39,9 +39,24 @@ const RestaurantHandler = {
     return restaurant;
   },
 
+  async getAllWithoutPagination(): Promise<IRestaurant[]> {
+    const restaurants = await Restaurant.find()
+      .populate("chef")
+      .populate("dishes")
+      .populate("signatureDish");
+
+    return restaurants;
+  },
+
   async create(restaurantData: IRestaurant): Promise<IRestaurant> {
-    const newRestaurant = new Restaurant(restaurantData);
+    const { signatureDish, ...restOfData } = restaurantData;
+    const newRestaurant = new Restaurant({
+      ...restOfData,
+      signatureDish: signatureDish || null,
+    });
+    console.log(newRestaurant);
     const savedRestaurant = await newRestaurant.save();
+    console.log(savedRestaurant);
     await Chef.findByIdAndUpdate(
       savedRestaurant.chef,
       { $push: { restaurants: savedRestaurant._id } },

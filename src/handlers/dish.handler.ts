@@ -12,7 +12,9 @@ const DishHandler = {
     return dish;
   },
   async create(dishData: IDish): Promise<IDish> {
+    console.log("dish handler: ");
     const newDish = new Dish(dishData);
+    console.log(newDish);
     const savedDish = await newDish.save();
     //update restaurant schema with the new dish.
     await Restaurant.findByIdAndUpdate(
@@ -35,6 +37,7 @@ const DishHandler = {
       updatedDishData.restaurant &&
       updatedDishData.restaurant !== currentDish.restaurant
     ) {
+      console.log("enter to the if condition");
       await Restaurant.findByIdAndUpdate(
         currentDish.restaurant,
         { $pull: { dishes: dishId } },
@@ -48,9 +51,12 @@ const DishHandler = {
       );
     }
 
+    console.log("updatedDishData from the client " + updatedDishData);
     const updatedDish = await Dish.findByIdAndUpdate(dishId, updatedDishData, {
       new: true,
     });
+
+    console.log("update dish after save" + updatedDish);
     return updatedDish;
   },
 

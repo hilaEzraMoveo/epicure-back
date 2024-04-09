@@ -3,8 +3,8 @@ import RestaurantHandler from "../handlers/restaurant.handler";
 
 export const getAll = async (req: Request, res: Response) => {
   try {
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 3;
+    const page = parseInt(req.query.nextPage as string);
+    const limit = parseInt(req.query.limit as string);
     const skip = (page - 1) * limit;
 
     const restaurants = await RestaurantHandler.getAll(limit, skip);
@@ -23,6 +23,15 @@ export const getById = async (req: Request, res: Response) => {
     }
     res.json(restaurant);
   } catch (error) {
+    res.status(500).json({ message: "An unexpected error occurred" });
+  }
+};
+
+export const getAllWithoutPagination = async (req: Request, res: Response) => {
+  try {
+    const restaurants = await RestaurantHandler.getAllWithoutPagination();
+    res.json(restaurants);
+  } catch (err) {
     res.status(500).json({ message: "An unexpected error occurred" });
   }
 };

@@ -25,6 +25,7 @@ export const getById = async (req: Request, res: Response) => {
 
 export const create = async (req: Request, res: Response) => {
   try {
+    console.log("dish controller");
     const newDish = await DishHandler.create(req.body);
     console.log(newDish);
     res.status(201).json(newDish);
@@ -36,7 +37,10 @@ export const create = async (req: Request, res: Response) => {
 export const update = async (req: Request, res: Response) => {
   try {
     const dishId = req.params.id;
-    const updatedDish = await DishHandler.update(dishId, req.body);
+    const updatedDish = await DishHandler.update(
+      dishId,
+      req.body.updatedDishData
+    );
     if (!updatedDish) {
       return res.status(404).json({ message: "Dish not found" });
     }

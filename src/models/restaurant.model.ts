@@ -20,7 +20,7 @@ const RestaurantShcema: Schema = new mongoose.Schema({
   chef: { type: Schema.Types.ObjectId, ref: "Chef", required: true },
   rating: { type: Number, required: true },
   dishes: [{ type: Schema.Types.ObjectId, ref: "Dish", required: true }],
-  signatureDish: { type: Schema.Types.ObjectId, ref: "Dish", required: true },
+  signatureDish: { type: Schema.Types.ObjectId, ref: "Dish", required: false },
   isPopular: { type: Boolean, required: true, default: false },
   status: {
     type: String,
