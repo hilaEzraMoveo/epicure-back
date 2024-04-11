@@ -55,7 +55,7 @@ const RestaurantHandler = {
       signatureDish: signatureDish || null,
     });
     console.log(newRestaurant);
-    const savedRestaurant = await newRestaurant.save();
+    const savedRestaurant = await (await newRestaurant.save()).populate("chef");
     console.log(savedRestaurant);
     await Chef.findByIdAndUpdate(
       savedRestaurant.chef,
@@ -87,7 +87,10 @@ const RestaurantHandler = {
       restaurantId,
       updatedRestaurantData,
       { new: true }
-    ).populate("chef");
+    )
+      .populate("chef")
+      .populate("dishes")
+      .populate("signatureDish");
     return updatedRestaurant;
   },
 
@@ -96,7 +99,10 @@ const RestaurantHandler = {
       restaurantId,
       { status: EStatus.DELETED },
       { new: true }
-    );
+    )
+      .populate("chef")
+      .populate("dishes")
+      .populate("signatureDish");
     if (deletedRestaurant) {
       await Chef.findByIdAndUpdate(
         deletedRestaurant.chef,

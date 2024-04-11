@@ -15,7 +15,7 @@ const DishHandler = {
     console.log("dish handler: ");
     const newDish = new Dish(dishData);
     console.log(newDish);
-    const savedDish = await newDish.save();
+    const savedDish = await (await newDish.save()).populate("restaurant");
     //update restaurant schema with the new dish.
     await Restaurant.findByIdAndUpdate(
       savedDish.restaurant,
@@ -54,7 +54,7 @@ const DishHandler = {
     console.log("updatedDishData from the client " + updatedDishData);
     const updatedDish = await Dish.findByIdAndUpdate(dishId, updatedDishData, {
       new: true,
-    });
+    }).populate("restaurant");
 
     console.log("update dish after save" + updatedDish);
     return updatedDish;
