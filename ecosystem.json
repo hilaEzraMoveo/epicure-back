@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "Epicure",
-      "script": "src/index.ts"
+      "script": "./dist/index.js"
     }
   ],
   "deploy": {
